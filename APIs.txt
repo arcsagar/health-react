@@ -1,0 +1,8 @@
+doctor :
+       get() getDoctorData
+       post()  setSchedule
+       get()         getSchedule
+             getAppoinent()
+
+    param  login:1
+             google.com?login:1/

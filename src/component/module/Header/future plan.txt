@@ -1,0 +1,18 @@
+doctor -> home , schedule timing , booked appointment , setting
+
+
+fragement
+ref - portal
+routing (SPA)
+api 
+redux
+testing
+custom hooks
+axios
+
+adavance
+dynamic forms
+module Pages
+scrum and methods
+kanban board
+jenikins
