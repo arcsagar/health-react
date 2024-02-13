@@ -44,6 +44,7 @@ const DialogMain = ({
             allDay: apEvent.allDay,
             title,
             isDeleted: false,
+            doctorId: userdata.userId,
             healthuser: userdata.userId
           };
           const newAppointmentApi = await postMethod(
