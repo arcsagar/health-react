@@ -13,10 +13,6 @@ const Users = () => {
         // const returnUsers = await getAllUsers(token);
         const token = getLS('token');
         if(token){
-          const getobj = {
-            url: 'http://localhost:3001/alluser', 
-            token: token
-          }
           const returnUsers = await getMethodFetch('http://localhost:3001/healthuser/allUser', token)
           console.log("returnUsers", returnUsers);
           setUsers(returnUsers);
