@@ -8,6 +8,8 @@ import Doctor from "./component/features/Doctor/Doctor";
 import Users from "./component/features/Doctor/Users/Users";
 import PageNotFound from "./component/Auth/PageNotFound";
 import Timings from "./component/features/Doctor/Timings/Timings";
+import Patient from "./component/features/Patient/Patient";
+import Admin from "./component/features/Admin/Admin";
 
 export const userContext = React.createContext<any>({ test: "test" });
 
@@ -19,6 +21,14 @@ const dyamicRoutes = [
   {
     path: "/signup",
     element: <SingUp />,
+  },
+  {
+    path: "/patient",
+    element: <Patient />,
+  },
+  {
+    path: "/admin",
+    element: <Admin />,
   },
   {
     path: "/doctor",

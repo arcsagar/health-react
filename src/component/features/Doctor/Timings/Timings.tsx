@@ -4,12 +4,16 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import { getLS } from "../../../Utils/Utils";
 import { getMethodFetch } from "../../../APIs/LoginFetch";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import DialogMain from "../../../module/DialogMain/DialogMain";
+import { userContext } from "../../../../App";
 const Timings = () => {
+  const { loginUser } = useContext(userContext);
   const [open, setOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any>();
-    const [appointment,setAppointment] = useState<any>([])
+    const [appointment,setAppointment] = useState<any>([]);
+
+
     const appointmentApi = async () => {
         const token = localStorage.getItem("token");
         if (token) {
@@ -47,7 +51,7 @@ const Timings = () => {
   return (
     <div>
       <h1>timing page</h1>
-      <DialogMain  setOpen={setOpen} open={open} apEvent={selectedEvent} appointmentApi={appointmentApi}/>
+      <DialogMain  setOpen={setOpen} open={open} userdata={loginUser} apEvent={selectedEvent} appointmentApi={appointmentApi}/>
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
         headerToolbar={{

@@ -10,8 +10,9 @@ import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AdbIcon from "@mui/icons-material/Adb";
 import { userContext } from "../../../App";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styless from './Header.module.scss';
+import { setLS } from "../../Utils/Utils";
 function Header({
   pages,
   changePage,
@@ -25,6 +26,7 @@ function Header({
     null
   );
 
+  const navigate = useNavigate();
   const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
@@ -37,6 +39,8 @@ function Header({
     setTimeout(() => {
       alert(`${loginUser.email} is logout`);
       setLoginUser({});
+      setLS('token', '');
+      navigate('/')
     }, 500);
   };
 

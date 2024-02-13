@@ -39,7 +39,14 @@ const SignIn = () => {
       // console.log("contextData", contextData);
       contextData.setLoginUser(userProfile);
 
-      navigate("/doctor");
+      if(userProfile.type === 'patient') {
+        navigate("/patient");
+      }else if (userProfile.type === 'doctor'){
+        navigate("/doctor");
+      }else if (userProfile.type === 'admin') {
+        navigate("/admin");
+      }
+ 
     }
   };
 

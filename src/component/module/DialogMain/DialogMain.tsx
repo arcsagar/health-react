@@ -12,12 +12,14 @@ const DialogMain = ({
   open,
   setOpen,
   apEvent,
-  appointmentApi
+  appointmentApi,
+  userdata
 }: {
   open: any;
   setOpen: any;
   apEvent: any;
-  appointmentApi: any
+  appointmentApi: any;
+  userdata?: any;
 }) => {
   const [title, setTitle] = React.useState("");
   const handleClose = () => {
@@ -42,6 +44,7 @@ const DialogMain = ({
             allDay: apEvent.allDay,
             title,
             isDeleted: false,
+            healthuser: userdata.userId
           };
           const newAppointmentApi = await postMethod(
             "http://localhost:3001/appointment/create",
