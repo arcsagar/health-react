@@ -57,6 +57,8 @@ appointmentData: any
 
   return { data: returnRes, status: apiRes.status };
 };
+
+
 export const getMethodFetch = async (URL: string, token: string) => {
   const getFetchApi = await fetch(URL, {
     method: "GET",

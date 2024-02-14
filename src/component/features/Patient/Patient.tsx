@@ -1,21 +1,20 @@
-import { useState } from "react";
 import Header from "../../module/Header/Header";
+import { Outlet } from "react-router-dom";
 
 const Patient = () => {
-    const [whichPage, setWhichPage] = useState("users");
+  const PatientPage = [
+    { name: "Home", path: "home" },
+    { name: "appointment", path: "appointment" },
+    { name: "Booked appointment", path: "bookedappointment" },
+    { name: "Setting", path: "setting" },
+  ];
 
-    const PatientPage = ["Home","book appointment", "Booked appointment", "Setting"];
-
-    const changePage = (page: string) => {
-        console.log('page',page)
-        setWhichPage(page);
-      }
-    return (
-        <div>
-            Patient
-            <Header pages={PatientPage} changePage={changePage}/>
-        </div>
-    )
+  return (
+    <div>
+      <Header pages={PatientPage} />
+      <Outlet />
+    </div>
+  );
 };
 
 export default Patient;

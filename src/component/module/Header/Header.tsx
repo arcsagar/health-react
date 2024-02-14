@@ -14,11 +14,9 @@ import { NavLink, useNavigate } from "react-router-dom";
 import styless from './Header.module.scss';
 import { setLS } from "../../Utils/Utils";
 function Header({
-  pages,
-  changePage,
+  pages
 }: {
-  pages: any[];
-  changePage: (page: string) => void;
+  pages: any[]
 }) {
   const { loginUser, setLoginUser } = React.useContext(userContext);
 
@@ -124,15 +122,9 @@ function Header({
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page:any) => (
-              // <Button
-              //   key={page}
-              //   onClick={() => changePage(page)}
-              //   sx={{ my: 2, color: "white", display: "block" }}
-              // >
-              //   {page}
-              // </Button>
 
               <NavLink
+              key={page.path}
               to={page.path}
               className={({ isActive, isPending }) =>
                 isPending ? "pending" : isActive ? styless['active'] : styless['default']

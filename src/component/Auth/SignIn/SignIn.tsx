@@ -40,11 +40,11 @@ const SignIn = () => {
       contextData.setLoginUser(userProfile);
 
       if(userProfile.type === 'patient') {
-        navigate("/patient");
+        navigate("/patient/home");
       }else if (userProfile.type === 'doctor'){
-        navigate("/doctor");
+        navigate("/doctor/home");
       }else if (userProfile.type === 'admin') {
-        navigate("/admin");
+        navigate("/admin/home");
       }
  
     }

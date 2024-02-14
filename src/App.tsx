@@ -10,9 +10,14 @@ import PageNotFound from "./component/Auth/PageNotFound";
 import Timings from "./component/features/Doctor/Timings/Timings";
 import Patient from "./component/features/Patient/Patient";
 import Admin from "./component/features/Admin/Admin";
+import PatientHome from "./component/features/Patient/Home/Home";
+import Appointment from "./component/features/Patient/Appointment/Appointment";
+import BookedAppointment from "./component/features/Patient/BookedAppointment/BookedAppointment";
+import Setting from "./component/features/Patient/Setting/Setting";
+import DoctorHome from "./component/features/Doctor/Home/Home";
 
 export const userContext = React.createContext<any>({ test: "test" });
-
+// https://reactrouter.com/en/main/hooks/use-params
 const dyamicRoutes = [
   {
     path: "/",
@@ -25,6 +30,24 @@ const dyamicRoutes = [
   {
     path: "/patient",
     element: <Patient />,
+    children: [
+      {
+        path: "home",
+        element: <PatientHome />,
+      },
+      {
+        path: "appointment",
+        element: <Appointment />,
+      },
+      {
+        path: "bookedappointment",
+        element: <BookedAppointment />,
+      },
+      {
+        path: "setting",
+        element: <Setting />,
+      },
+    ]
   },
   {
     path: "/admin",
@@ -34,6 +57,9 @@ const dyamicRoutes = [
     path: "/doctor",
     element: <Doctor />,
     children: [
+      {path: 'home',
+      element: <DoctorHome />,
+    },
       {
         path: "users",
         element: <Users />,
