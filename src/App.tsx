@@ -15,6 +15,7 @@ import Appointment from "./component/features/Patient/Appointment/Appointment";
 import BookedAppointment from "./component/features/Patient/BookedAppointment/BookedAppointment";
 import Setting from "./component/features/Patient/Setting/Setting";
 import DoctorHome from "./component/features/Doctor/Home/Home";
+import DoctorBookedAppointment from "./component/features/Doctor/DoctorBookedAppointment/DoctorBookedAppointment";
 
 export const userContext = React.createContext<any>({ test: "test" });
 // https://reactrouter.com/en/main/hooks/use-params
@@ -67,6 +68,10 @@ const dyamicRoutes = [
       {
         path: "timing",
         element: <Timings />,
+      },
+      {
+        path: "bappointment",
+        element: <DoctorBookedAppointment />,
       }
     ],
   },
