@@ -1,21 +1,25 @@
-import React, { useState } from "react";
+import React, { lazy, Suspense } from "react";
 import "./App.css";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignIn from "./component/Auth/SignIn/SignIn";
 import SingUp from "./component/Auth/SingUp/SingUp";
-import Doctor from "./component/features/Doctor/Doctor";
 import Users from "./component/features/Doctor/Users/Users";
 import PageNotFound from "./component/Auth/PageNotFound";
 import Timings from "./component/features/Doctor/Timings/Timings";
-import Patient from "./component/features/Patient/Patient";
-import Admin from "./component/features/Admin/Admin";
 import PatientHome from "./component/features/Patient/Home/Home";
 import Appointment from "./component/features/Patient/Appointment/Appointment";
 import BookedAppointment from "./component/features/Patient/BookedAppointment/BookedAppointment";
 import Setting from "./component/features/Patient/Setting/Setting";
 import DoctorHome from "./component/features/Doctor/Home/Home";
 import DoctorBookedAppointment from "./component/features/Doctor/DoctorBookedAppointment/DoctorBookedAppointment";
+import { ADMIN_PATH, PATIENT_APPOINTMENT_PATH, PATIENT_BOOKAPPOINTMENT_PATH, PATIENT_HOME_PATH, PATIENT_PATH, SIGN_UP_PATH } from "./Constants/App.constant";
+import Loading from "./component/module/Loading/Loading";
+
+
+const Patient = lazy(() => import('./component/features/Patient/Patient'));
+const Doctor = lazy(() => import('./component/features/Doctor/Doctor'));
+const Admin = lazy(() => import('./component/features/Admin/Admin'))
 
 export const userContext = React.createContext<any>({ test: "test" });
 // https://reactrouter.com/en/main/hooks/use-params
@@ -25,23 +29,23 @@ const dyamicRoutes = [
     element: <SignIn />,
   },
   {
-    path: "/signup",
+    path: SIGN_UP_PATH,
     element: <SingUp />,
   },
   {
-    path: "/patient",
+    path: PATIENT_PATH,
     element: <Patient />,
     children: [
       {
-        path: "home",
+        path: PATIENT_HOME_PATH,
         element: <PatientHome />,
       },
       {
-        path: "appointment",
+        path: PATIENT_APPOINTMENT_PATH,
         element: <Appointment />,
       },
       {
-        path: "bookedappointment",
+        path: PATIENT_BOOKAPPOINTMENT_PATH,
         element: <BookedAppointment />,
       },
       {
@@ -51,7 +55,7 @@ const dyamicRoutes = [
     ]
   },
   {
-    path: "/admin",
+    path: ADMIN_PATH,
     element: <Admin />,
   },
   {
@@ -84,18 +88,15 @@ const dyamicRoutes = [
 const router = createBrowserRouter(dyamicRoutes);
 
 function App() {
-  const [loginUser, setLoginUser] = useState<any>({});
 
-  console.log("loginUser", loginUser);
-  const providerObj = {
-    loginUser,
-    setLoginUser,
-  };
+
 
   return (
-    <userContext.Provider value={providerObj}>
+      <Suspense fallback={<Loading />} >
       <RouterProvider router={router} />
-    </userContext.Provider>
+
+      </Suspense>
+
   );
 }
 export default App;

@@ -9,16 +9,14 @@ import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
 import Button from "@mui/material/Button";
 import AdbIcon from "@mui/icons-material/Adb";
-import { userContext } from "../../../App";
 import { NavLink, useNavigate } from "react-router-dom";
-import styless from './Header.module.scss';
+import styless from "./Header.module.scss";
 import { setLS } from "../../Utils/Utils";
-function Header({
-  pages
-}: {
-  pages: any[]
-}) {
-  const { loginUser, setLoginUser } = React.useContext(userContext);
+import { useDispatch, useSelector } from "react-redux";
+import { setUserData } from "../../../MainStore/userStore/user.reducer";
+function Header({ pages }: { pages: any[] }) {
+  const { userdata } = useSelector((state: any) => state.user);
+  const dispatch = useDispatch();
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
@@ -35,14 +33,13 @@ function Header({
 
   const logout = () => {
     setTimeout(() => {
-      alert(`${loginUser.email} is logout`);
-      setLoginUser({});
-      setLS('token', '');
-      navigate('/')
+      alert(`${userdata?.email} is logout`);
+      dispatch(setUserData({}));
+      setLS("token", "");
+      navigate("/");
     }, 500);
   };
 
-  console.log('loginUser',loginUser)
   return (
     <AppBar position="static">
       <Container maxWidth="xl">
@@ -62,7 +59,7 @@ function Header({
               textDecoration: "none",
             }}
           >
-            {`${loginUser.type} - ${loginUser.email}`}
+            {`${userdata?.type} - ${userdata?.email}`}
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -121,17 +118,20 @@ function Header({
             LOGO
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page:any) => (
-
+            {pages.map((page: any) => (
               <NavLink
-              key={page.path}
-              to={page.path}
-              className={({ isActive, isPending }) =>
-                isPending ? "pending" : isActive ? styless['active'] : styless['default']
-              }
-            >
-              {page.name}
-            </NavLink>
+                key={page.path}
+                to={page.path}
+                className={({ isActive, isPending }) =>
+                  isPending
+                    ? "pending"
+                    : isActive
+                    ? styless["active"]
+                    : styless["default"]
+                }
+              >
+                {page.name}
+              </NavLink>
             ))}
           </Box>
 
